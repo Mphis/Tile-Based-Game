@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Art/shadow.png" type="Texture" id=2]
+[ext_resource path="res://Art/Right.png" type="Texture" id=3]
+[ext_resource path="res://Art/Left.png" type="Texture" id=4]
+[ext_resource path="res://Art/Down.png" type="Texture" id=5]
+[ext_resource path="res://Art/Back.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Idle_R",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Idle_L",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "Idle_D",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Idle_B",
+"speed": 5.0
+} ]
+_sections_unfolded = [ "Resource" ]
+
+[node name="Player" type="KinematicBody2D"]
+
+position = Vector2( -0.0100126, 0 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Material" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="." index="0"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 0.35, 0.35 )
+limit_left = 0
+limit_top = 0
+limit_right = 448
+limit_bottom = 255
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Limit", "Offset", "Z Index" ]
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="1"]
+
+enabled = false
+exclude_parent = true
+cast_to = Vector2( 0, 20 )
+collision_mask = 1
+_sections_unfolded = [ "Visibility" ]
+
+[node name="Shadow" type="Sprite" parent="." index="2"]
+
+self_modulate = Color( 1, 1, 1, 0.26 )
+position = Vector2( 0.366989, 2.8136 )
+z_index = -1
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="3"]
+
+position = Vector2( 0.244659, -1.95728 )
+frames = SubResource( 1 )
+animation = "Idle_D"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="4"]
+
+build_mode = 0
+polygon = PoolVector2Array( -4.04927, 14.1658, -3.74344, -2.04294, 4.14685, -1.85944, 4.51384, 14.227 )
+
+
